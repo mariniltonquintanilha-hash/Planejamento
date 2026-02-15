@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Agenda - Interface Profissional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">📅</div>
+                    <h1>Nova</h1>
+                </div>
+                <p class="subtitle">Gerenciador de Agenda Inteligente</p>
+            </div>
+            <div class="header-date" id="headerDate"></div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" data-view="week">Esta Semana</button>
+            <button class="nav-btn" data-view="today">Hoje</button>
+            <button class="nav-btn" data-view="summary">Resumo</button>
+            <button class="nav-btn nav-btn-add" id="openFormBtn">+ Novo Evento</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Week View -->
+            <section id="weekView" class="view active">
+                <div class="days-grid" id="daysGrid">
+                    <!-- Carregado dinamicamente -->
+                </div>
+            </section>
+
+            <!-- Today View -->
+            <section id="todayView" class="view">
+                <div class="timeline" id="timeline">
+                    <!-- Carregado dinamicamente -->
+                </div>
+            </section>
+
+            <!-- Summary View -->
+            <section id="summaryView" class="view">
+                <div class="summary-stats" id="summaryStats">
+                    <!-- Carregado dinamicamente -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Spinner -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Carregando agenda...</p>
+        </div>
+    </div>
+
+    <!-- Modal para detalhes do evento -->
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div id="eventDetails"></div>
+        </div>
+    </div>
+
+    <!-- Modal para criar/editar evento -->
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeFormModal()">&times;</button>
+            <h2 style="margin-bottom: 20px; color: #00d4ff;">Novo Evento</h2>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Título *</label>
+                    <input type="text" id="eventTitle" required placeholder="Nome do evento">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDate">Data *</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventStartTime">Hora Início *</label>
+                        <input type="time" id="eventStartTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventEndTime">Hora Fim *</label>
+                        <input type="time" id="eventEndTime" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventCategory">Categoria *</label>
+                        <select id="eventCategory" required>
+                            <option value="">Selecione...</option>
+                            <option value="Fiscal">Fiscal</option>
+                            <option value="Desenvolvimento">Desenvolvimento</option>
+                            <option value="Lazer">Lazer</option>
+                            <option value="Pessoal">Pessoal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventPriority">Prioridade *</label>
+                        <select id="eventPriority" required>
+                            <option value="">Selecione...</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Média">Média</option>
+                            <option value="Baixa">Baixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventNotes">Notas</label>
+                    <textarea id="eventNotes" placeholder="Adicione notas ou detalhes..."></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-primary">Criar Evento</button>
+                    <button type="button" class="btn-secondary" onclick="closeFormModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
